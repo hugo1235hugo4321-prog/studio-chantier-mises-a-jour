@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Studio Chantier — tes vidéos de chantier en TikTok, toutes seules</title>
-<meta name="description" content="Importe ta vidéo de chantier : l'app écrit un script drôle, fait la voix off, monte la vidéo TikTok avec sous-titres. 3 vidéos offertes. Pour Mac.">
+<title>Studio Chantier — ta vidéo devient un TikTok, toute seule</title>
+<meta name="description" content="Importe ta vidéo : l'app écrit un script drôle, fait la voix off, monte la vidéo TikTok avec sous-titres. 3 vidéos offertes. Pour Mac.">
 <meta property="og:title" content="Studio Chantier">
-<meta property="og:description" content="Tes vidéos de chantier deviennent des TikToks, toutes seules. 3 vidéos offertes.">
+<meta property="og:description" content="Ta vidéo devient un TikTok, toute seule. 3 vidéos offertes.">
 <meta property="og:image" content="icon.png">
 <link rel="icon" href="icon.png">
 <style>
@@ -40,6 +40,13 @@
   .cta { display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .mobile-note { display: none; max-width: 520px; margin: 0 auto; padding: 14px; border-radius: var(--r); background: var(--bg2); border: 1px solid var(--line); text-align: left; }
   body.is-mobile .mobile-note { display: block; }
+
+  /* Preuve */
+  .proof { display: flex; gap: 16px; align-items: center; margin: 0 0 44px; }
+  .proof img { width: 120px; flex: 0 0 auto; border-radius: 12px; border: 1px solid var(--line); cursor: zoom-in; transition: width 0.2s; }
+  .proof img.big { width: min(320px, 70vw); cursor: zoom-out; }
+  .proof-num { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; margin: 6px 0 2px; color: var(--accent2); }
+  @media (max-width: 420px) { .proof { align-items: flex-start; } .proof img { width: 104px; } }
 
   /* Cartes */
   .grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
@@ -89,7 +96,7 @@
 
 <header>
   <img class="logo" src="icon.png" alt="Studio Chantier">
-  <h1>Ta vidéo de chantier devient un TikTok,<br><span class="hl">toute seule.</span></h1>
+  <h1>Ta vidéo devient un TikTok,<br><span class="hl">toute seule.</span></h1>
   <p class="lead">Tu importes ta vidéo brute. L’app écrit un script drôle, fait la voix off, monte la vidéo au format TikTok avec les sous-titres mot par mot. Tu n’as plus qu’à publier.</p>
   <p><span class="pill">🎁 3 vidéos offertes · sans carte bancaire</span></p>
   <div class="cta" style="margin-top:22px">
@@ -103,10 +110,20 @@
   </div>
 </header>
 
+<div class="proof card">
+  <img src="preuve.jpg" alt="Récompenses TikTok d'octobre 2026 : 6 234,40 €" loading="lazy" onclick="this.classList.toggle('big')">
+  <div>
+    <div class="pill">📈 Résultat réel</div>
+    <div class="proof-num">6 234 €</div>
+    <p class="small">de récompenses TikTok en octobre 2026, sur un compte qui publie ce type de vidéos.</p>
+    <p class="small muted">Capture du Programme de récompenses TikTok. Les résultats dépendent de tes vidéos et de ton compte : ils ne sont pas garantis.</p>
+  </div>
+</div>
+
 <section id="comment">
   <h2>Comment ça marche</h2>
   <div class="grid two">
-    <div class="card step"><div class="num">1</div><div><h3>Tu glisses ta vidéo</h3><p class="muted small">Une ou plusieurs vidéos de ton chantier, telles que tu les as filmées.</p></div></div>
+    <div class="card step"><div class="num">1</div><div><h3>Tu glisses ta vidéo</h3><p class="muted small">Une ou plusieurs vidéos, telles que tu les as filmées.</p></div></div>
     <div class="card step"><div class="num">2</div><div><h3>L’app écrit le script</h3><p class="muted small">Elle regarde la vidéo, comprend le travail et écrit une histoire drôle à la première personne, avec un hook fort. Tu peux la modifier, ou mettre ton propre hook.</p></div></div>
     <div class="card step"><div class="num">3</div><div><h3>Voix off + montage</h3><p class="muted small">Voix naturelle fabriquée sur ton Mac (gratuite), coupes dynamiques, sous-titres mot par mot, format 9:16, durée réglée à la seconde (ex : 1:01).</p></div></div>
     <div class="card step"><div class="num">4</div><div><h3>Tu publies</h3><p class="muted small">La vidéo est prête dans ton dossier Vidéos, et un projet CapCut modifiable est créé si tu veux retoucher.</p></div></div>
@@ -128,7 +145,7 @@
         <li>Une vidéo brute de <strong>1 à 5 minutes</strong> (plus longue, c’est possible aussi)</li>
         <li>Une action qui avance et un <strong>résultat visible à la fin</strong> (avant / après, trouvaille, travail fini)</li>
         <li>Verticale ou horizontale : l’app recadre toute seule sur la personne</li>
-        <li>Plusieurs vidéos d’un même chantier : importe-les <strong>dans l’ordre</strong>, l’app les assemble</li>
+        <li>Plusieurs vidéos d’un même projet : importe-les <strong>dans l’ordre</strong>, l’app les assemble</li>
       </ul>
     </div>
     <div class="card">
