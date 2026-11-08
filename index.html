@@ -100,13 +100,13 @@
   <p class="lead">Tu importes ta vidéo brute. L’app écrit un script drôle, fait la voix off, monte la vidéo au format TikTok avec les sous-titres mot par mot. Tu n’as plus qu’à publier.</p>
   <p><span class="pill">🎁 3 vidéos offertes · sans carte bancaire</span></p>
   <div class="cta" style="margin-top:22px">
-    <a class="btn primary" id="dl" href="https://github.com/hugo1235hugo4321-prog/studio-chantier-mises-a-jour/releases/latest/download/Studio-Chantier.dmg">⬇ Télécharger pour Mac</a>
+    <a class="btn primary" id="dl" data-goatcounter-click="telechargement" data-goatcounter-title="Clic sur Télécharger" href="https://github.com/hugo1235hugo4321-prog/studio-chantier-mises-a-jour/releases/latest/download/Studio-Chantier.dmg">⬇ Télécharger pour Mac</a>
     <span class="small muted">Mac avec puce Apple (M1, M2, M3, M4…) · gratuit pour tes 3 premières vidéos</span>
   </div>
   <div class="mobile-note" style="margin-top:18px">
     <strong>📱 Tu es sur ton téléphone ?</strong>
     <p class="small muted" style="margin:6px 0 10px">L’app s’installe sur un Mac. Copie le lien et ouvre-le sur ton Mac (ou envoie-le toi par message).</p>
-    <button class="btn ghost" style="width:100%" onclick="copy(location.href.split('#')[0], 'Lien copié : ouvre-le sur ton Mac')">Copier le lien de la page</button>
+    <button class="btn ghost" style="width:100%" data-goatcounter-click="lien-copie-telephone" onclick="copy(location.href.split('#')[0], 'Lien copié : ouvre-le sur ton Mac')">Copier le lien de la page</button>
   </div>
 </header>
 
@@ -224,5 +224,7 @@
   }
   function fallback(text, done) { const a = document.createElement('textarea'); a.value = text; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); } catch (e) {} a.remove(); done(); }
 </script>
+<!-- Compteur de visites GoatCounter (sans cookies) : https://studiochantier.goatcounter.com -->
+<script data-goatcounter="https://studiochantier.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
