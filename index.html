@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Chantier — tes vidéos de chantier en TikTok, toutes seules</title>
+<meta name="description" content="Importe ta vidéo de chantier : l'app écrit un script drôle, fait la voix off, monte la vidéo TikTok avec sous-titres. 3 vidéos offertes. Pour Mac.">
+<meta property="og:title" content="Studio Chantier">
+<meta property="og:description" content="Tes vidéos de chantier deviennent des TikToks, toutes seules. 3 vidéos offertes.">
+<meta property="og:image" content="icon.png">
+<link rel="icon" href="icon.png">
+<style>
+  :root {
+    --bg: #0e1015; --bg2: #171a21; --bg3: #1e222b; --line: #2a2f3a;
+    --text: #eef0f4; --muted: #9aa3b2; --accent: #ff8a00; --accent2: #ffb347; --ok: #4ade80;
+    --r: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent2); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  h1 { font-size: clamp(30px, 7vw, 48px); line-height: 1.1; margin: 18px 0 14px; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(23px, 5vw, 30px); line-height: 1.2; margin: 0 0 18px; letter-spacing: -0.01em; }
+  h3 { margin: 0 0 6px; font-size: 18px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 14px; }
+  .hl { color: var(--accent); }
+
+  /* En-tête */
+  header { padding: 28px 0 40px; text-align: center; }
+  .logo { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 10px 40px rgba(255, 138, 0, 0.25); }
+  .lead { font-size: 18px; color: #cfd5df; max-width: 620px; margin: 0 auto 22px; }
+  .pill { display: inline-block; padding: 5px 12px; border-radius: 999px; background: rgba(255, 138, 0, 0.12); color: var(--accent2); font-weight: 600; font-size: 14px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 24px; border-radius: 14px; border: 0; font: 700 17px/1 inherit; text-decoration: none; cursor: pointer; }
+  .btn.primary { background: linear-gradient(180deg, #ff9a1f, #ff7a00); color: #1a1000; }
+  .btn.ghost { background: var(--bg3); color: var(--text); border: 1px solid var(--line); }
+  .cta { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .mobile-note { display: none; max-width: 520px; margin: 0 auto; padding: 14px; border-radius: var(--r); background: var(--bg2); border: 1px solid var(--line); text-align: left; }
+  body.is-mobile .mobile-note { display: block; }
+
+  /* Cartes */
+  .grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 680px) { .grid.two { grid-template-columns: 1fr 1fr; } .grid.four { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; }
+  .step { display: flex; gap: 14px; }
+  .num { flex: 0 0 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 138, 0, 0.14); color: var(--accent); font-weight: 800; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 18px; }
+  .tag { padding: 7px 12px; border-radius: 999px; background: var(--bg3); border: 1px solid var(--line); font-size: 14px; }
+  ul.check, ul.cross { list-style: none; padding: 0; margin: 0; }
+  ul.check li, ul.cross li { padding: 6px 0 6px 28px; position: relative; }
+  ul.check li::before { content: "✓"; position: absolute; left: 4px; color: var(--ok); font-weight: 800; }
+  ul.cross li::before { content: "✕"; position: absolute; left: 4px; color: #f87171; font-weight: 800; }
+
+  /* Exemple avant / après */
+  .example { display: grid; gap: 12px; grid-template-columns: 1fr; align-items: stretch; }
+  @media (min-width: 680px) { .example { grid-template-columns: 1fr auto 1fr; } }
+  .arrow { display: grid; place-items: center; color: var(--accent); font-size: 28px; font-weight: 800; }
+  .file { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: var(--bg3); margin-top: 10px; }
+  .file .ic { width: 42px; height: 42px; border-radius: 10px; background: #2b3140; display: grid; place-items: center; font-size: 20px; }
+  .phone { margin: 10px auto 0; width: 100%; max-width: 240px; aspect-ratio: 9/16; border-radius: 22px; background: linear-gradient(160deg, #3a3f2c, #6b5a3a 55%, #2b2a24); position: relative; overflow: hidden; border: 3px solid #2a2f3a; }
+  .phone .sub { position: absolute; left: 0; right: 0; top: 58%; text-align: center; font-weight: 900; font-size: 19px; text-transform: uppercase; color: #fff; text-shadow: 0 3px 0 #000, 0 0 8px #000; letter-spacing: 0.02em; }
+  .phone .sub b { color: #ffd400; }
+  .phone .top { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; font-size: 11px; color: #fff; opacity: 0.85; }
+  .script { font-size: 15px; background: var(--bg3); border-radius: 12px; padding: 12px; margin-top: 10px; color: #dfe4ec; }
+  .script em { color: var(--accent2); font-style: normal; font-weight: 600; }
+
+  /* Installation */
+  .code { display: flex; gap: 8px; align-items: stretch; margin: 10px 0 4px; }
+  .code code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: 12px; border-radius: 10px; background: #0a0c10; border: 1px solid var(--line); font: 13px/1.4 ui-monospace, Menlo, monospace; color: #c9f7d0; }
+  .code button { flex: 0 0 auto; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg3); color: var(--text); font: 600 14px inherit; cursor: pointer; }
+
+  /* Prix */
+  .price { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; }
+  details { background: var(--bg2); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  details + details { margin-top: 8px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: 10px 0 0; color: #cfd5df; }
+  footer { padding: 36px 0 60px; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #111; border: 1px solid var(--line); padding: 10px 16px; border-radius: 999px; opacity: 0; transition: 0.2s; pointer-events: none; }
+  .toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img class="logo" src="icon.png" alt="Studio Chantier">
+  <h1>Ta vidéo de chantier devient un TikTok,<br><span class="hl">toute seule.</span></h1>
+  <p class="lead">Tu importes ta vidéo brute. L’app écrit un script drôle, fait la voix off, monte la vidéo au format TikTok avec les sous-titres mot par mot. Tu n’as plus qu’à publier.</p>
+  <p><span class="pill">🎁 3 vidéos offertes · sans carte bancaire</span></p>
+  <div class="cta" style="margin-top:22px">
+    <a class="btn primary" id="dl" href="https://github.com/hugo1235hugo4321-prog/studio-chantier-mises-a-jour/releases/latest/download/Studio-Chantier.dmg">⬇ Télécharger pour Mac</a>
+    <span class="small muted">Mac avec puce Apple (M1, M2, M3, M4…) · gratuit pour tes 3 premières vidéos</span>
+  </div>
+  <div class="mobile-note" style="margin-top:18px">
+    <strong>📱 Tu es sur ton téléphone ?</strong>
+    <p class="small muted" style="margin:6px 0 10px">L’app s’installe sur un Mac. Copie le lien et ouvre-le sur ton Mac (ou envoie-le toi par message).</p>
+    <button class="btn ghost" style="width:100%" onclick="copy(location.href.split('#')[0], 'Lien copié : ouvre-le sur ton Mac')">Copier le lien de la page</button>
+  </div>
+</header>
+
+<section id="comment">
+  <h2>Comment ça marche</h2>
+  <div class="grid two">
+    <div class="card step"><div class="num">1</div><div><h3>Tu glisses ta vidéo</h3><p class="muted small">Une ou plusieurs vidéos de ton chantier, telles que tu les as filmées.</p></div></div>
+    <div class="card step"><div class="num">2</div><div><h3>L’app écrit le script</h3><p class="muted small">Elle regarde la vidéo, comprend le travail et écrit une histoire drôle à la première personne, avec un hook fort. Tu peux la modifier, ou mettre ton propre hook.</p></div></div>
+    <div class="card step"><div class="num">3</div><div><h3>Voix off + montage</h3><p class="muted small">Voix naturelle fabriquée sur ton Mac (gratuite), coupes dynamiques, sous-titres mot par mot, format 9:16, durée réglée à la seconde (ex : 1:01).</p></div></div>
+    <div class="card step"><div class="num">4</div><div><h3>Tu publies</h3><p class="muted small">La vidéo est prête dans ton dossier Vidéos, et un projet CapCut modifiable est créé si tu veux retoucher.</p></div></div>
+  </div>
+</section>
+
+<section id="videos">
+  <h2>Quelles vidéos importer ?</h2>
+  <p class="muted">Des vidéos de quelqu’un qui <strong style="color:var(--text)">fait quelque chose de ses mains</strong>, du début à la fin. Par exemple :</p>
+  <div class="tags">
+    <span class="tag">🚜 Terrassement, mini-pelle</span><span class="tag">🧱 Maçonnerie, dalle</span><span class="tag">🔍 Détection de métaux</span>
+    <span class="tag">🏚️ Rénovation</span><span class="tag">💦 Nettoyage haute pression</span><span class="tag">🌳 Jardinage, élagage</span>
+    <span class="tag">🔧 Mécanique, restauration</span><span class="tag">🪵 Artisanat</span>
+  </div>
+  <div class="grid two">
+    <div class="card">
+      <h3>✅ Ce qui marche le mieux</h3>
+      <ul class="check small">
+        <li>Une vidéo brute de <strong>1 à 5 minutes</strong> (plus longue, c’est possible aussi)</li>
+        <li>Une action qui avance et un <strong>résultat visible à la fin</strong> (avant / après, trouvaille, travail fini)</li>
+        <li>Verticale ou horizontale : l’app recadre toute seule sur la personne</li>
+        <li>Plusieurs vidéos d’un même chantier : importe-les <strong>dans l’ordre</strong>, l’app les assemble</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>❌ À éviter</h3>
+      <ul class="cross small">
+        <li>Une vidéo qui a déjà une voix off ou une musique forte</li>
+        <li>Des plans fixes où il ne se passe rien</li>
+        <li>Une vidéo très floue, tremblée ou de nuit</li>
+        <li>Des vidéos d’autres créateurs (filme les tiennes 😉)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Un exemple</h3>
+  <div class="example">
+    <div class="card">
+      <div class="small muted">Tu importes</div>
+      <div class="file"><div class="ic">🎬</div><div><strong>tranchee-jardin.mp4</strong><div class="small muted">3 min 20 · un gars creuse une tranchée à la mini-pelle et tombe sur une vieille boîte en fer</div></div></div>
+      <div class="script small"><span class="muted">L’app écrit (extrait) :</span><br><em>« Personne n’avait creusé ici depuis cinquante ans. »</em> Ce matin, je devais juste passer un tuyau pour mon voisin Thierry. Trois coups de godet plus tard, ça sonne bizarre sous la pelle… Et là, une boîte en fer toute rouillée. Franchement, vous l’auriez ouverte, vous ?</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="card" style="text-align:center">
+      <div class="small muted">Tu obtiens</div>
+      <div class="phone"><div class="top"><span>1:01</span><span>9:16</span></div><div class="sub">une boîte en <b>fer</b><br>toute rouillée</div></div>
+      <p class="small muted" style="margin-top:10px">Vidéo TikTok de 1:01, voix off, coupes rythmées, sous-titres mot par mot. + projet CapCut.</p>
+    </div>
+  </div>
+</section>
+
+<section id="installer">
+  <h2>Installer l’app (5 minutes)</h2>
+  <div class="grid">
+    <div class="card step"><div class="num">1</div><div><h3>Télécharge et ouvre le fichier</h3><p class="muted small">Clique sur « Télécharger pour Mac », puis double-clique sur <strong>Studio-Chantier.dmg</strong> dans tes Téléchargements.</p></div></div>
+    <div class="card step"><div class="num">2</div><div><h3>Glisse l’app dans Applications</h3><p class="muted small">Fais glisser l’icône Studio Chantier sur le dossier Applications.</p></div></div>
+    <div class="card step"><div class="num">3</div><div style="min-width:0">
+      <h3>Autorise l’app (une seule fois)</h3>
+      <p class="muted small">Ouvre le <strong>Terminal</strong> (touches ⌘ + Espace, tape « Terminal », Entrée), colle cette ligne, puis Entrée :</p>
+      <div class="code"><code id="cmd">xattr -dr com.apple.quarantine "/Applications/Studio Chantier.app"</code><button onclick="copy(document.getElementById('cmd').textContent, 'Commande copiée')">Copier</button></div>
+      <p class="muted small">Rien ne s’affiche : c’est normal. Ça dit juste à ton Mac que tu fais confiance à l’app.</p>
+    </div></div>
+    <div class="card step"><div class="num">4</div><div><h3>Lance Studio Chantier</h3><p class="muted small">Les réglages s’ouvrent tout seuls : ajoute ta clé Claude (elle écrit les scripts) et clique sur « Installer la voix » (environ 5 Go, une seule fois). C’est prêt.</p></div></div>
+  </div>
+  <p class="small muted" style="margin-top:14px">Ensuite, l’app <strong style="color:var(--text)">se met à jour toute seule</strong> : un bandeau te propose chaque nouvelle version, en un clic.</p>
+</section>
+
+<section id="prix">
+  <h2>Prix</h2>
+  <div class="grid two">
+    <div class="card"><div class="small muted">Pour essayer</div><div class="price">0 €</div><p class="muted small">Tes 3 premières vidéos sont offertes, avec toutes les fonctions.</p></div>
+    <div class="card"><div class="small muted">Ensuite</div><div class="price">19,97 € <span class="small muted" style="font-weight:500">/ mois</span></div><p class="muted small">Par virement (permanent, ou 3, 6 ou 12 mois d’un coup). Tout se fait depuis l’app.</p></div>
+  </div>
+  <p class="small muted" style="margin-top:12px">La voix est fabriquée sur ton Mac : aucun abonnement de voix à payer. Les scripts sont écrits par Claude avec ta propre clé : environ 10 à 20 centimes par vidéo.</p>
+</section>
+
+<section id="faq">
+  <h2>Questions</h2>
+  <details><summary>Quel ordinateur faut-il ?</summary><p>Un Mac avec puce Apple (M1, M2, M3, M4…) et environ 10 Go libres. Ça marche aussi sur un Mac 8 Go (un peu plus lentement). Pas encore de version Windows.</p></details>
+  <details><summary>Combien de temps pour une vidéo ?</summary><p>Environ 4 à 8 minutes pour une vidéo d’une minute, selon ton Mac. Tu peux aussi lancer une série de vidéos et laisser l’app travailler toute seule.</p></details>
+  <details><summary>Je peux utiliser ma propre voix ?</summary><p>Oui : importe 15 à 25 secondes de ta voix et l’app la copie (uniquement ta voix, ou celle d’une personne qui t’a donné son accord).</p></details>
+  <details><summary>Je peux faire des vidéos en anglais ou en allemand ?</summary><p>Oui : choisis la langue dans les réglages ou par niche. Le script et la voix sont faits dans cette langue.</p></details>
+  <details><summary>Mon Mac dit que l’app « est endommagée » ou elle ne s’ouvre pas</summary><p>C’est la protection de macOS pour les apps téléchargées. Fais l’étape 3 de l’installation (la ligne à coller dans le Terminal), puis relance l’app.</p></details>
+</section>
+
+<footer>
+  <p>Une question ? Écris-moi : <a href="mailto:fncs1er@gmail.com">fncs1er@gmail.com</a></p>
+  <p>© Studio Chantier</p>
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+  // Sur téléphone : on explique que l'app s'installe sur un Mac.
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && !/Macintosh/.test(navigator.userAgent))) document.body.classList.add('is-mobile');
+  function copy(text, msg) {
+    const done = () => { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => fallback(text, done)); else fallback(text, done);
+  }
+  function fallback(text, done) { const a = document.createElement('textarea'); a.value = text; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); } catch (e) {} a.remove(); done(); }
+</script>
+</body>
+</html>
