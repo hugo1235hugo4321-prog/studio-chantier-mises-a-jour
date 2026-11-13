@@ -61,6 +61,43 @@
   body.is-mobile .mobile-note { display: block; }
   .shot { margin: 56px auto 0; max-width: 1000px; padding: 8px; border-radius: var(--r-lg); background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)); box-shadow: 0 40px 120px -30px rgba(255, 138, 0, 0.25), 0 30px 80px rgba(0, 0, 0, 0.6); }
   .shot img, .shot video { border-radius: 14px; width: 100%; height: auto; display: block; background: #111; }
+  /* Lecteur vidéo orange */
+  .player { position: relative; border-radius: 14px; overflow: hidden; background: #111; aspect-ratio: 16 / 9; }
+  .player video { border-radius: 0; height: 100%; object-fit: cover; cursor: pointer; }
+  .player:fullscreen { border-radius: 0; aspect-ratio: auto; }
+  .player:fullscreen video { object-fit: contain; }
+  .pl-big { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 14px; padding: 10px 26px 10px 10px; border: 0; border-radius: 999px; background: var(--accent); color: #1a1000; font: 700 18px/1 Inter, sans-serif; cursor: pointer; box-shadow: 0 0 0 8px rgba(255, 138, 0, 0.18), 0 20px 50px rgba(0, 0, 0, 0.45); transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s; animation: plPulse 2.4s ease-in-out infinite; }
+  .pl-big:hover { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 0 12px rgba(255, 138, 0, 0.22), 0 24px 60px rgba(0, 0, 0, 0.5); }
+  .pl-big-ico { width: 56px; height: 56px; border-radius: 99px; background: #1a1000; color: var(--accent); display: grid; place-items: center; }
+  .pl-big-ico svg { margin-left: 3px; }
+  .pl-big-txt span { font-weight: 600; opacity: 0.7; }
+  @keyframes plPulse { 0%, 100% { box-shadow: 0 0 0 8px rgba(255, 138, 0, 0.18), 0 20px 50px rgba(0, 0, 0, 0.45); } 50% { box-shadow: 0 0 0 16px rgba(255, 138, 0, 0.08), 0 20px 50px rgba(0, 0, 0, 0.45); } }
+  .player.playing .pl-big, .player.started:not(.ended) .pl-big { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.9); }
+  .pl-bar { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 14px; background: rgba(13, 13, 15, 0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line2); opacity: 0; transform: translateY(8px); transition: opacity 0.2s, transform 0.2s; }
+  .player.started .pl-bar { opacity: 1; transform: none; }
+  .player.playing.idle .pl-bar { opacity: 0; transform: translateY(8px); }
+  .player.playing.idle { cursor: none; }
+  .pl-btn { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: var(--text); cursor: pointer; }
+  .pl-btn:hover { background: rgba(255, 255, 255, 0.08); color: var(--accent2); }
+  .pl-play { background: var(--accent); color: #1a1000; }
+  .pl-play:hover { background: var(--accent2); color: #1a1000; }
+  .pl-play .i-pause, .player.playing .pl-play .i-play, .pl-mute .i-off, .player.muted .pl-mute .i-on { display: none; }
+  .player.playing .pl-play .i-pause, .player.muted .pl-mute .i-off { display: block; }
+  .pl-time { flex: none; min-width: 34px; font: 600 13px/1 Inter, sans-serif; color: var(--text2); font-variant-numeric: tabular-nums; }
+  .pl-track { position: relative; flex: 1; height: 6px; border-radius: 99px; background: rgba(255, 255, 255, 0.14); cursor: pointer; touch-action: none; }
+  .pl-track::before { content: ""; position: absolute; inset: -10px 0; }
+  .pl-buf { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.18); }
+  .pl-fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 99px; background: var(--accent); }
+  .pl-knob { position: absolute; right: -7px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 99px; background: #fff; box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.35); transform: scale(0); transition: transform 0.15s; }
+  .pl-track:hover .pl-knob, .pl-track.drag .pl-knob, .pl-track:focus-visible .pl-knob { transform: scale(1); }
+  .pl-track:focus-visible { outline: 2px solid var(--accent-line); outline-offset: 4px; }
+  @media (max-width: 600px) {
+    .pl-big { padding: 7px 18px 7px 7px; font-size: 15px; gap: 10px; }
+    .pl-big-ico { width: 42px; height: 42px; }
+    .pl-bar { left: 6px; right: 6px; bottom: 6px; gap: 4px; padding: 4px 6px; border-radius: 11px; }
+    .pl-btn { width: 32px; height: 32px; }
+    .pl-dur { display: none; }
+  }
 
   section { padding: 96px 0 0; }
   @media (max-width: 719px) { section { padding-top: 72px; } }
@@ -170,7 +207,29 @@
     <button class="btn ghost" style="width:100%" data-goatcounter-click="lien-copie-telephone" onclick="copy(location.href.split('#')[0], 'Lien copié : ouvre-le sur ton Mac')">Copier le lien de la page</button>
   </div>
   <div class="shot">
-    <video src="presentation.mp4" poster="presentation.jpg" width="1600" height="900" controls playsinline preload="metadata" aria-label="Présentation de Studio Chantier en 27 secondes"></video>
+    <div class="player" id="player">
+      <video src="presentation.mp4" poster="presentation.jpg" width="1600" height="900" playsinline preload="metadata" aria-label="Présentation de Studio Chantier en 27 secondes"></video>
+      <button class="pl-big" type="button" aria-label="Lire la vidéo">
+        <span class="pl-big-ico"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+        <span class="pl-big-txt">Voir la démo <span>· 27 s</span></span>
+      </button>
+      <div class="pl-bar">
+        <button class="pl-btn pl-play" type="button" aria-label="Lecture">
+          <svg class="i-play" viewBox="0 0 24 24" width="20" height="20"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" width="20" height="20"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"/><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"/></svg>
+        </button>
+        <span class="pl-time">0:00</span>
+        <div class="pl-track" role="slider" aria-label="Avancement" tabindex="0"><div class="pl-buf"></div><div class="pl-fill"><span class="pl-knob"></span></div></div>
+        <span class="pl-time pl-dur">0:27</span>
+        <button class="pl-btn pl-mute" type="button" aria-label="Couper le son">
+          <svg class="i-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+          <svg class="i-off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+        </button>
+        <button class="pl-btn pl-fs" type="button" aria-label="Plein écran">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -326,6 +385,49 @@
 <div class="zoom" id="zoom" onclick="this.classList.remove('on')"><img alt=""></div>
 <div class="toast" id="toast"></div>
 <script>
+  // Lecteur vidéo orange de la démo.
+  (function () {
+    const p = document.getElementById('player');
+    if (!p) return;
+    const v = p.querySelector('video'), track = p.querySelector('.pl-track'), fill = p.querySelector('.pl-fill'), buf = p.querySelector('.pl-buf');
+    const cur = p.querySelector('.pl-time'), dur = p.querySelector('.pl-dur');
+    const fmt = (t) => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+    const toggle = () => { if (v.paused || v.ended) { v.play(); } else { v.pause(); } };
+    let idle;
+    const wake = () => { p.classList.remove('idle'); clearTimeout(idle); idle = setTimeout(() => p.classList.add('idle'), 2200); };
+    const paint = () => {
+      const d = v.duration || 0;
+      fill.style.width = d ? (v.currentTime / d) * 100 + '%' : '0';
+      cur.textContent = fmt(v.currentTime);
+      track.setAttribute('aria-valuenow', Math.round(v.currentTime));
+    };
+    v.addEventListener('loadedmetadata', () => { dur.textContent = fmt(v.duration); track.setAttribute('aria-valuemax', Math.round(v.duration)); });
+    v.addEventListener('timeupdate', paint);
+    v.addEventListener('progress', () => { if (v.buffered.length && v.duration) buf.style.width = (v.buffered.end(v.buffered.length - 1) / v.duration) * 100 + '%'; });
+    v.addEventListener('play', () => { p.classList.add('playing', 'started'); p.classList.remove('ended'); wake(); });
+    v.addEventListener('pause', () => { p.classList.remove('playing', 'idle'); });
+    v.addEventListener('ended', () => { p.classList.add('ended'); p.classList.remove('playing', 'idle'); });
+    v.addEventListener('volumechange', () => p.classList.toggle('muted', v.muted));
+    v.addEventListener('click', toggle);
+    p.querySelector('.pl-big').addEventListener('click', () => { v.currentTime = v.ended ? 0 : v.currentTime; v.play(); });
+    p.querySelector('.pl-play').addEventListener('click', toggle);
+    p.querySelector('.pl-mute').addEventListener('click', () => { v.muted = !v.muted; });
+    p.querySelector('.pl-fs').addEventListener('click', () => {
+      if (document.fullscreenElement) return document.exitFullscreen();
+      if (p.requestFullscreen) p.requestFullscreen();
+      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); // iPhone
+    });
+    p.addEventListener('pointermove', wake);
+    const seek = (e) => { const r = track.getBoundingClientRect(); const x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); if (v.duration) { v.currentTime = x * v.duration; paint(); } };
+    track.addEventListener('pointerdown', (e) => { track.setPointerCapture(e.pointerId); track.classList.add('drag'); seek(e); });
+    track.addEventListener('pointermove', (e) => { if (track.classList.contains('drag')) seek(e); });
+    track.addEventListener('pointerup', () => track.classList.remove('drag'));
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { v.currentTime = Math.min(v.duration, v.currentTime + 3); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { v.currentTime = Math.max(0, v.currentTime - 3); e.preventDefault(); }
+    });
+    p.addEventListener('keydown', (e) => { if (e.key === ' ' && e.target === v) { e.preventDefault(); toggle(); } });
+  })();
   // Sur téléphone : on explique que l'app s'installe sur un Mac.
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && !/Macintosh/.test(navigator.userAgent))) document.body.classList.add('is-mobile');
   function copy(text, msg) {
