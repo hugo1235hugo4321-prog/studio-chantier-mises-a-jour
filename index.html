@@ -60,7 +60,7 @@
   .mobile-note { display: none; max-width: 520px; margin: 22px auto 0; padding: 16px; border-radius: var(--r); background: var(--bg2); border: 1px solid var(--line2); text-align: left; }
   body.is-mobile .mobile-note { display: block; }
   .shot { margin: 56px auto 0; max-width: 1000px; padding: 8px; border-radius: var(--r-lg); background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)); box-shadow: 0 40px 120px -30px rgba(255, 138, 0, 0.25), 0 30px 80px rgba(0, 0, 0, 0.6); }
-  .shot img { border-radius: 14px; width: 100%; }
+  .shot img, .shot video { border-radius: 14px; width: 100%; height: auto; display: block; background: #111; }
 
   section { padding: 96px 0 0; }
   @media (max-width: 719px) { section { padding-top: 72px; } }
@@ -170,7 +170,7 @@
     <button class="btn ghost" style="width:100%" data-goatcounter-click="lien-copie-telephone" onclick="copy(location.href.split('#')[0], 'Lien copié : ouvre-le sur ton Mac')">Copier le lien de la page</button>
   </div>
   <div class="shot">
-    <img src="app.jpg" alt="L’écran d’accueil de Studio Chantier" width="1600" height="822">
+    <video src="presentation.mp4" poster="presentation.jpg" width="1600" height="900" controls playsinline preload="metadata" aria-label="Présentation de Studio Chantier en 27 secondes"></video>
   </div>
 </header>
 
